@@ -1,0 +1,6 @@
+try:
+   예외가 발생할 수도 있는 명령
+except 예외타입 as e:
+   print(e)
+finally:
+   예외발생여부와 상관없이 마무리 명령
