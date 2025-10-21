@@ -1,0 +1,68 @@
+ch13 아파트 분양가분석
+1. 패키지로드 및 한글설정
+# 패키지 import
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# 시각화의 선명도를 높임
+%config InlineBackend.figure_format = "retina"
+
+# 한글설정
+sns.set(style='white', rc={'figure.figsize':(12,5)})
+plt.rc('font', family='Malgun Gothic') # 윈도우즈
+plt.rc('axes', unicode_minus=False) # 축의 - 깨짐 방지
+
+# 다른 폰트를 기본 폰트로 하려면
+from matplotlib.font_manager import FontProperties
+font_path = 'C:/Windows/Fonts/CAT.ttf'
+font_prop = FontProperties(fname=font_path, size=30)
+# plt.rc('font', family=font_prop.get_name())
+
+# warning(경고) 안보이게
+import warnings
+warnings.filterwarnings(action='ignore')
+
+2. 데이터 로드
+pd.read_csv('경로',형식)
+
+3. apply
+- apply(함수, axis) : 1차원, 2차원(axis 지정. axis기본값0)
+- map(함수) : 1차원
+- applymap(함수) : 2차원(모든 요소들에 함수를 적용)\
+
+4. 전용면적, 이하, '' 없애기, 제곱미터 -> 
+x = '전용면적 85제곱미터초과 102제곱미터이하'
+import re
+re.sub('전용면적|이하| ', '', x).replace('제곱미터', 'm²').replace('초과','~')
+
+5.열제거 
+df_last.drop(['규모구분', '분양가격(제곱미터)'], axis=1, inplace=True)
+
+6. 컬럼순서를 바꿔서 배치
+col = df_last.pop('전용면적') # '전용면적' 컬럼 뻬서 col변수 할당
+df_last.insert(1, '전용면적', col) # 1번째 열에 col 추가
+
+7. groupby
+- df_last.groupby(["인덱스로사용할컬럼명"])["계산할컬럼명"].연산함수()
+- df_last.pivot_table(index=["인덱스로사용할컬럼명"],
+                    values=["계산할컬럼명"],
+                    aggfunc="연산함수명")
+- pd.pivot_table(df_last, index=["인덱스로사용할컬럼명"],
+                    values=["계산할컬럼명"],
+                    aggfunc="연산함수명")
+
+8.  지역명별 데이터 행 갯수(결측치 제외) : 결과가 2차원 데이터프레임 - pivot_table
+df_last.pivot_table(index=['지역명'],
+                   values='평당분양가격',
+                   aggfunc='count')
+pd.pivot_table(df_last, index='지역명',
+              values='평당분양가격',
+              aggfunc='count')
+
+9. unstack() : level0(지역명) 인덱스는 그대로 두고, level1을 컬럼으로
+df_last.groupby(['지역명','전용면적'])['평당분양가격'].mean().unstack().round(1)
+
+10. concat
+df = pd.concat([new_first, new_last]).reset_index(drop=True)
