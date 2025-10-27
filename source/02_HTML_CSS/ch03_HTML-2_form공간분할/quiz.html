@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 290px;
+            margin: 20px auto;
+        }
+    </style>
+    <script>
+        function chk() {
+            if (frm.name.value.length < 2) {
+                alert('이름은 2글자 이상 필수입력입니다');
+                frm.name.focus();
+                return false;
+            } else if (frm.id.value.length < 4) {
+                alert('아이디는 4글자 이상 필수입력입니다');
+                frm.id.focus();
+                return false;
+            } else if (!frm.pw.value) {
+                alert('비밀번호는 필수입력입니다');
+                frm.pw.focus();
+                return false;
+            } else if (frm.pw.value != frm.pwChk.value) {
+                alert('비밀번호를 확인하세요');
+                frm.pw.value = ''; // 입력된 비밀번호 input 내용지우기
+                frm.pwChk.value = '';
+                frm.pw.focus();
+                return false; // submit 거부
+            } else if (!frm.tel.value) {
+                alert('전화는 필수입력입니다');
+                frm.tel.focus();
+                return false;
+            } else if (!frm.email.value) {
+                alert('이메일은 필수입력입니다');
+                frm.email.focus();
+                return false;
+            }
+            return true; // submit 작동
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        <h1>회원가입</h1>
+        <hr />
+        <form>
+            <fieldset>
+                <legend>필수입력</legend>
+                <table>
+                    <tr>
+                        <td>이름</td>
+                        <td><input type="text" name="name" placeholder="이름은 2자리 이상" /></td>
+                    </tr>
+                    <tr>
+                        <td>아이디</td>
+                        <td><input type="text" name="id" placeholder="ID는 4글자 이상" /></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" name="pw" /></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" name="pwChk" /></td>
+                    </tr>
+                    <tr>
+                        <td>전화</td>
+                        <td><input type="text" name="tel" placeholder="XX-XXX-XXXX/000-0000-0000"</td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td><input type="text" name="email" placeholder="id@domain.com또는co.kr"</td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>추가 입력사항</legend>
+                <table>
+                    <tr>
+                        <td>결혼 유 무</td>
+                        <td>
+                            <input type="radio" name="wedding" value="기혼" />기혼
+                            <input type="radio" name="wedding" value="미혼" checked="checked" />미혼
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>자식</td>
+                        <td>
+                            <input type="checkbox" name="child" value="man" />아들
+                            <input type="checkbox" name="child" value="girl" />딸
+                        </td>
+                    <tr>
+                        <td>지역</td>
+                        <td>
+                            <select name="nation">
+                                <option value="seo">서울</option>
+                                <option value="keng" selected="selected">경기</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <br />
+            <input type="submit" value="가입" />
+            <input type="reset" value="취소" />
+            <br />
+        </form>
+        <hr />
+        <div id="footer">
+            <p>서울시 관악구 신림동 르네상스쇼핑몰BD 901호</p>
+            <p>Copyright ⓒ XX All rights reserved.</p>
+        </div>
+</body>
+</html>
