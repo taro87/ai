@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+        h2{text-align: center;}
+        h3{text-align: center;}
+        h4{text-align: center;}
+        h5{text-align: center;}
+    </style>
+    <script>
+        let cnt = 0; //점수 누적횟수
+        let right = 0; //제대로된 숫자를 입력 횟수(0~100사이의 숫자)
+        let wrong = 0; //제대로된 숫자를 입력하지 않은 횟수
+        let sum = 0; //점수 누적
+        whlie(confirm('누적할래?')){
+            cnt++;
+            scoreStr = prompt("점수를 입력하세요", "0~100");
+            score = parseInt(scoreStr);
+                if(scoreStr && scoreStr.trim() && !isNaN(score) && score>=0 && score<=100){
+                    right++;
+                    sum += score;
+                }else{
+                    wrong++;
+                }
+            }
+                document.writeln('<h2>총 누적합은</h2>'+sum+'<br>')
+                document.writeln('<h3>총 누적횟수는</h3>'+cnt+'<br>')
+                document.writeln('<h4>잘못입력한 횟수는</h4>'+wrong+'<br>')
+                document.writeln('<h5>점수를 제대로 입력한 횟수는</h5>'+right+'<br>')
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
