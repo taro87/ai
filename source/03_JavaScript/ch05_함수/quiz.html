@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title></title>
+    <style>
+    body{
+    background-image: url(ch05_img/img03.png);
+    background-size: 100%;
+    font-size: 1.5em;
+    color: white;
+    }
+    </style>
+    <script>
+    /*힌트 : 배열 이용하면 소스가 효율적 */
+    let sec = 0;
+    let img = ['url(ch05_img/img03.png)',
+                'url(ch05_img/img01.png)',
+                'url(ch05_img/img02.png)']
+    let color = ['white', 'yellow', 'blue']
+    document.writeln(new Date().toLocaleString());
+    document.body.innerHTML = [sec]+'초 지남';
+    document.body.style.backgroundImage = img[0];
+    document.body.style.color = color[0];
+    let id = setInterval(() =>{
+        sec++;
+        document.body.innerHTML = ''
+        document.writeln(new Date().toLocaleString(), '<br>');
+        document.body.innerHTML += [sec]+'초 지남';
+        document.body.style.backgroundImage = img[sec%img.length];
+        document.body.style.color = color[sec%img.length];
+        document.body.style.fontSize = '1.5em';
+        document.body.style.webkitBackgroundSize = '100%';
+        }, 1000);
+    setTimeout( ()=> clearInterval(id), 10000);
+    // document.body.style = 'background-color: #ff0000';
+
+    //document.body.style = 'background-image: url(ch05_img/img01.png)';
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
