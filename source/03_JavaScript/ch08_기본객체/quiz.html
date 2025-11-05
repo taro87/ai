@@ -31,23 +31,54 @@ outline: 1px solid #385d81;
         let mail = frm.mail.value.trim();
         let pw = frm.pw.value.trim();
         let pwChk = frm.pwChk.value.trim();
-        if(!name.match(patternName)){
+        if(name == ''){
+            alert('이름을 입력하세요')
+            frm.name.focus();
+            return false;
+        }else if(!name.match(patternName)){
             alert('2글자 이상 및 형식이 아닙니다');
             frm.name.focus();
+            return false;
+        }else if(mail == ''){
+            alert('메일을 입력하세요')
+            frm.mail.focus();
             return false;
         }else if(!mail.match(patternEmail)){
             alert('메일 형식이 아닙니다');
             frm.mail.focus();
             return false;
+        }else if(pw == ''){
+            alert('패스워드를 입력하세요')
+            frm.pw.focus();
+            return false;
         }else if(!pw.match(patternEng || patternNum || patternSpe || pw.length > 4)){
             alert('패스워드는 영문자 및 숫자, 특수문자 조합으로 4자 이상이여야 합니다');
             frm.pw.focus();
+            return false;
+        }else if(pwChk == ''){
+            alert('입력한 패스워드를 한번 더 입력하세요')
+            frm.pwChk.focus();
             return false;
         }else if(pw!=pwChk){
             alert('입력한 패스워드와 동일해야 합니다');
             frm.pwChk.focus();
             return false;
         }else{
+            const blob = new Blob([frm.name.value,'<br>',frm.mail.value,'<br>',frm.pw.value],{type:'text/plain'});
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = frm.name.value;
+            document.body.appendChild(a);
+            
+            a.click();
+
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 100);
             alert('입력되었습니다')
         }
     }
