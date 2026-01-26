@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog", # 앱등록
+    "accounts",
+    "book",
+    "django.contrib.humanize", # intcomma(세자리마다 ,) 필터 사용
 ]
 
 MIDDLEWARE = [
@@ -126,8 +129,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = "static/"
+# 개발 환경
+STATIC_URL = "static/" # 앱폴더 밑의 static
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'myproject', 'static')
+]
+# 배포 후 운영환경(2월)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
